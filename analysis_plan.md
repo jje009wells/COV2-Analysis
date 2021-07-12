@@ -6,7 +6,7 @@
 - The parse_fasta and parse_header functions, in order to traverse the data from the file
 - The kmer composition one from assignment 4
 
-I will present this information in ????what???
+I could present this information using a line plot that records the size of the kmer against the amount of kmers in common for group A against group B and group A against group C. The lines may vary as the kmer sizes do, but lines that are higher up on the graph will obviously indicate more kmers in common and therefore may be indicators that these two groups of data are more similar than the other.
 
 # Plan 2
 I am interested in developing a phylogenetic tree of the COVID virus located in Asia from December 2019 to the most current data. I am limiting by these factors in order to try to keep the amount of data that I am analyzing to smaller, easier to work with amount. Based off of research largely from biointeractive.org (https://www.biointeractive.org/classroom-resources/creating-phylogenetic-trees-dna-sequences) and the Oxford University Press youtube (https://www.youtube.com/watch?v=09eD4A_HxVQ), the basic steps to making a tree seem to be:
