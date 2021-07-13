@@ -95,6 +95,8 @@ function filter25k(data)
 	newSeq = Vector()
 	i = 0
 	for i in 1:length(data[1])
+		seqlength = length(data[2][i])
+		@info "length is $seqlength"
 		if length(data[2][i]) > 25000
 			push!(newSeq, data[2][i])
 			push!(newHeaders, data[1][i])
@@ -103,6 +105,17 @@ function filter25k(data)
 	end
 	
 	return (newHeaders, newSeq)
+end
+
+# ╔═╡ ae4b1764-4e1d-4b54-8519-abef3761986b
+begin
+	newGenomes = filter25k(genomes)
+	new_seq_lengths = Vector()
+	# stores each indivual sequence length in one Vector for easier calculation later
+	for sequence in newGenomes[2]
+	    push!(new_seq_lengths, length(sequence))
+	end
+	histogram(new_seq_lengths, label = "", xaxis = "Sequence Lengths", yaxis = "Count")
 end
 
 # ╔═╡ Cell order:
@@ -114,3 +127,4 @@ end
 # ╠═9cb89580-e0e4-11eb-08c7-ad14760a13d2
 # ╠═bb6c6a47-ecf7-42a6-aafb-c47e3a946ecf
 # ╠═2073af8f-59f3-4d26-b8fc-77dd9da60a21
+# ╠═ae4b1764-4e1d-4b54-8519-abef3761986b
