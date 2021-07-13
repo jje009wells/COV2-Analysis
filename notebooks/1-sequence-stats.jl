@@ -88,6 +88,23 @@ begin
 	println("Min is $min")
 end
 
+# ╔═╡ 2073af8f-59f3-4d26-b8fc-77dd9da60a21
+#filters out the sequences that are less than 25k in length
+function filter25k(data)
+	newHeaders = Vector()
+	newSeq = Vector()
+	i = 0
+	for i in 1:length(data[1])
+		if length(data[2][i]) > 25000
+			push!(newSeq, data[2][i])
+			push!(newHeaders, data[1][i])
+			i = i - 1
+		end
+	end
+	
+	return (newHeaders, newSeq)
+end
+
 # ╔═╡ Cell order:
 # ╠═781f89b8-d61d-4e2c-9999-e0c86fe5732e
 # ╠═13535e83-f647-47b8-a0b9-0539103b6771
@@ -96,3 +113,4 @@ end
 # ╠═09c83c28-a88e-4d91-873d-8ade50ae691b
 # ╠═9cb89580-e0e4-11eb-08c7-ad14760a13d2
 # ╠═bb6c6a47-ecf7-42a6-aafb-c47e3a946ecf
+# ╠═2073af8f-59f3-4d26-b8fc-77dd9da60a21
