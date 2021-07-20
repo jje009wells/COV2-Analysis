@@ -39,7 +39,48 @@ https://github.com/jje009wells/BioinformaticsBISC195
   ERROR: LoadError: Some tests did not pass: 41 passed, 1 failed, 1 errored, 0 broken.
   ```
 - A bunch of functions are unfinished
+- A number of functions are pretty inefficient.
+  - use typed arrays (eg `String[]` for kmers instead of `[]`)
+  - try not to cycle through lots of different collection types (Dicts -> Sets -> vectors etc),
+    try to stick with one from the beginning. Eg
 
+    ```julia
+    julia> seqs = [join(rand("ACGT", 20)) for _ in 1:10000];
+    
+    julia> @benchmark kmercollecting($seqs, 3) # current version
+    BenchmarkTools.Trial: 55 samples with 1 evaluation.
+     Range (min … max):  86.472 ms … 97.356 ms  ┊ GC (min … max): 3.73% … 7.69%
+     Time  (median):     90.552 ms              ┊ GC (median):    6.58%
+     Time  (mean ± σ):   91.072 ms ±  2.667 ms  ┊ GC (mean ± σ):  6.86% ± 2.22%
+    
+              ▁  ▁▁▁  ▄ ▁▄▄     ▁ ▄ █▁  ▁         ▁          ▁
+      ▆▁▁▁▆▁▁▆█▁▆███▆▆█▁███▆▁▆▆▁█▁█▆██▁▆█▁▁▁▁▁▁▁▁▁█▆▆▁▁▁▁▆▁▆▆█▆▁▆ ▁
+      86.5 ms         Histogram: frequency by time        96.4 ms <
+    
+     Memory estimate: 48.94 MiB, allocs estimate: 799987.
+    
+    julia> function kmercollecting2(seqs, n) # new version
+               map(seqs) do seq
+                   Set(seq[i:(i+n-1)] for i in 1:(length(seq)-n+1))
+               end
+           end
+    kmercollecting2 (generic function with 1 method)
+    
+    julia> @benchmark kmercollecting2($seqs, 3)
+    BenchmarkTools.Trial: 403 samples with 1 evaluation.
+     Range (min … max):  10.016 ms … 68.695 ms  ┊ GC (min … max):  0.00% … 80.71%
+     Time  (median):     10.701 ms              ┊ GC (median):     0.00%
+     Time  (mean ± σ):   12.428 ms ±  4.481 ms  ┊ GC (mean ± σ):  13.73% ± 15.09%
+    
+      ▄▇█▆▅▂▁                ▁ ▁  ▁  ▁▁   ▁▂
+      ███████▄▅▅▄▄▁▅▄▁▅▆█▆█▅▇█▆█▆███▆████▇██▄▁▅▁▁▅▁▄▁▁▁▁▁▁▁▁▁▁▁▁▄ ▇
+      10 ms        Histogram: log(frequency) by time      21.5 ms <
+    
+     Memory estimate: 13.28 MiB, allocs estimate: 250005.
+    ```
+    
+    that is, a 9x speed-up, using 1/4 of the memory
+- 
 
 ## Analysis repo
 
