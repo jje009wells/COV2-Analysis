@@ -2,7 +2,8 @@
 
 # Plan 1 v2
 I am interested in comparing kmers from the sequences from different parts of Africa to the sequences from South America.
-I want to see the similarity of these sequences to each other and to themselves over time, predicting that as a whole sequences from Egpyt would be more similar to sequences from Ghana than to Peruvian sequences due to the big differences in geographic proximity.
+I want to see the similarity of these sequences to each other and to themselves over time, predicting that as a whole sequences from Egpyt
+would be more similar to sequences from Ghana than to Peruvian sequences o due to the big differences in geographic proximity.  
 I would parse through the Egypt data and store a collection of only the kmers that exist in all of those sequences,
 then do the same for both Ghana data and Peru data.
 I could make a bar chart, labeled by country, that shows a count of all these kmers per country,
