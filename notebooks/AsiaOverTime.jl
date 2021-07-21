@@ -12,6 +12,7 @@ using BioinformaticsBISC195
 
 # ╔═╡ 8caeb780-e92e-11eb-35b2-7d9a19f314cd
 function monthlycomparison(original, allSeq)
+	# TODO: Put this in your package
     score = Vector() # each index of vector will tell how many months have passed in Dec 19, can use this in the graph I think
     for seq in allSeq
         if() # check the month and year here, will have to parse headers
